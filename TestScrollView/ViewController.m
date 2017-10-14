@@ -8,7 +8,9 @@
 
 #import "ViewController.h"
 
-@interface ViewController ()
+@interface ViewController ()<UIScrollViewDelegate>
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
 @end
 
@@ -16,9 +18,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    self.scrollView.contentSize = self.imageView.frame.size;
+    self.scrollView.minimumZoomScale = 0.3;
+    self.scrollView.maximumZoomScale = 3.0;
 }
 
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView{
+    return self.imageView;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
